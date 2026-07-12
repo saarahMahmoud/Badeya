@@ -18,6 +18,14 @@
  * independent of WhatsApp.
  */
 function doPost(e) {
+  // e is undefined if this function is triggered via the editor's Run button
+  // instead of a real HTTP POST to the deployed /exec URL — see testDoPost() below.
+  if (!e || !e.postData) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ result: "error", message: "No POST data received" }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
 
   if (sheet.getLastRow() === 0) {
@@ -45,4 +53,26 @@ function doGet() {
   return ContentService
     .createTextOutput(JSON.stringify({ status: "badeya orders endpoint is live" }))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+/**
+ * Run this one from the editor (select "testDoPost" in the function dropdown,
+ * then Run) to simulate a real order and confirm a row gets appended.
+ * Don't run doPost directly — the editor can't fake an HTTP request for it.
+ */
+function testDoPost() {
+  var fakeEvent = {
+    postData: {
+      contents: JSON.stringify({
+        name: "عميل تجريبي",
+        phone: "01016860556",
+        address: "القاهرة - مدينة نصر - شارع تجريبي",
+        notes: "طلب اختباري",
+        items: "زيت زيتون أورجانيك (1 لتر) × 1 = 600 ج.م",
+        total: 600
+      })
+    }
+  };
+  var result = doPost(fakeEvent);
+  Logger.log(result.getContent());
 }

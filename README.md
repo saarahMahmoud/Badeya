@@ -36,6 +36,18 @@ dependencies.
 8. Every new order will now append a row: Timestamp, Name, Phone, Address,
    Notes, Items, Total.
 
+**Testing it:** Don't click "Run" on `doPost` directly in the Apps Script
+editor — there's no real HTTP request in that context, so `e` is `undefined`
+and it'll throw `Cannot read properties of undefined (reading 'postData')`.
+That error is expected there and doesn't mean anything is broken. Instead:
+- Run the `testDoPost` function from the editor's function dropdown, which
+  simulates a real order, or
+- Test the actual deployed URL from a terminal:
+  ```
+  curl -X POST "YOUR_EXEC_URL" -H "Content-Type: text/plain" \
+    -d '{"name":"Test","phone":"01016860556","address":"Cairo","items":"Oil x1","total":600}'
+  ```
+
 **If you ever need to change the logic** (add a column, send an email
 notification, etc.), edit the Apps Script project directly at
 script.google.com, then **Deploy → Manage deployments → Edit → New version**.
