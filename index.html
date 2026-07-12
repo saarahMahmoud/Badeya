@@ -661,7 +661,7 @@ async function sendOrder(){
   btn.textContent = "جاري إرسال الطلب...";
 
   // سجّلي الطلب في Google Sheet (fire-and-forget؛ no-cors يمنع قراءة الرد لكن الإرسال بيتم فعليًا)
-  if(SHEET_WEBAPP_URL && !SHEET_WEBAPP_URL.includes("PASTE_YOUR")){
+  if(SHEET_WEBAPP_URL && !SHEET_WEBAPP_URL.includes("https://script.google.com/macros/s/AKfycbxpVhOSmdA30U1NmNxFPDxDXVB3RKiEt_FjvjrowdXAkBeHBHa1-zQLfLriYj6bxNxtEA/exec")){
     try{
       await fetch(SHEET_WEBAPP_URL, {
         method: "POST",
