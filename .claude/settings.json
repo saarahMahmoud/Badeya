@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git commit -m ' *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(node --check google-apps-script.gs)",
+      "Bash(git add *)",
+      "Bash(cp google-apps-script.gs /tmp_check.js)",
+      "Bash(cp google-apps-script.gs __TRACKED_VAR__/check.js)",
+      "Bash(node --check \"C:/Users/Sara/AppData/Local/Temp/claude/c--Users-Sara-badeya/24622747-9f01-4363-87c4-55def545e8c1/scratchpad/gas_check.js\")",
+      "Bash(node --check \"C:/Users/Sara/AppData/Local/Temp/claude/c--Users-Sara-badeya/24622747-9f01-4363-87c4-55def545e8c1/scratchpad/gas_check3.js\")"
+    ]
+  }
+}
