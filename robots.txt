@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hikids-kg.github.io/Badeya/sitemap.xml
+Sitemap: https://badeya.netlify.app/sitemap.xml

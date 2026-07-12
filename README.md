@@ -66,17 +66,28 @@ Product photos are embedded as base64 in `const IMGS = {...}` right above it —
 to swap a photo, replace its base64 string (or move to real image files, see
 "Future enhancements" below).
 
-## Deployment (GitHub Pages, free)
+## Deployment (Netlify, free)
 
-This repo is set up to deploy at `https://hikids-kg.github.io/Badeya/`.
+This repo is set up assuming the site will live at `https://badeya.netlify.app/`
+— update that placeholder (in `index.html`'s canonical/og:url tags, plus
+`sitemap.xml` and `robots.txt`) once you know the real subdomain Netlify
+assigns you.
 
 1. Push this folder to `github.com/HiKids-KG/Badeya` (see push instructions
    given separately, since it needs your authenticated GitHub session).
-2. On GitHub: **Settings → Pages**.
-3. Under "Build and deployment", **Source: Deploy from a branch**.
-4. Branch: `main`, folder: `/ (root)` → **Save**.
-5. Wait ~1 minute, then the site is live at the URL above.
-6. Any future `git push` to `main` redeploys automatically.
+2. Go to [app.netlify.com](https://app.netlify.com) and sign up/log in
+   (GitHub login works and makes step 3 easier).
+3. **Add new site → Import an existing project → GitHub** → pick the
+   `Badeya` repo.
+4. Build settings: leave build command empty and publish directory as `/`
+   (root) — this is a static site, nothing to build.
+5. Click **Deploy**. Netlify assigns a random name like
+   `random-name-123.netlify.app` — before or after deploying, go to
+   **Site configuration → Change site name** and set it to `badeya` (or
+   whatever's free) to get `https://badeya.netlify.app/`.
+6. If the name you picked differs from `badeya`, update the placeholder URL
+   in the files listed above to match.
+7. Any future `git push` to `main` redeploys automatically.
 
 ## Future enhancements worth considering
 
