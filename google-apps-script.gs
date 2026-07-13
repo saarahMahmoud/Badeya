@@ -44,7 +44,7 @@ function setupProducts() {
   if (products.getLastRow() === 0) {
     products.appendRow(PRODUCT_HEADERS);
     products.appendRow([
-      "yes", "fullpack", "images/hero.jpg", "الباكدج الكاملة", "عرض خاص",
+      "yes", "fullpack", "images/fullpack.jpg", "الباكدج الكاملة", "عرض خاص",
       "لتر زيت زيتون + زيت شعر 200 مل + شامبو 300 مل + ٢ صابونة 120 جم — وفّر ٥١ ج.م",
       999, 1050, "عرض", 1
     ]);
