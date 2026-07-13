@@ -535,7 +535,11 @@ const WA_NUMBER = "201016860556";
 // نفس رابط Apps Script — بيقرأ المنتجات بـ ?action=products وبيسجّل الطلبات بـ POST
 const SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxpVhOSmdA30U1NmNxFPDxDXVB3RKiEt_FjvjrowdXAkBeHBHa1-zQLfLriYj6bxNxtEA/exec";
 const HERO_IMG = "images/hero.jpg";
+// Bump this when you change images — forces browsers to load the new files
+const IMG_V = "20260713";
 let PRODUCTS = [];
+
+function imgUrl(path){ return path + (path.includes("?") ? "&" : "?") + "v=" + IMG_V; }
 
 async function loadProducts(){
   if(SHEET_WEBAPP_URL && !SHEET_WEBAPP_URL.includes("PASTE_YOUR")){
@@ -547,12 +551,12 @@ async function loadProducts(){
       }
     }catch(e){ /* fallback to products.json */ }
   }
-  const r = await fetch("products.json");
+  const r = await fetch("products.json?v=" + IMG_V);
   if(!r.ok) throw new Error("products.json unavailable");
   return r.json();
 }
 
-document.getElementById("heroImg").src = HERO_IMG;
+document.getElementById("heroImg").src = imgUrl(HERO_IMG);
 
 let cart = {};
 try{ cart = JSON.parse(localStorage.getItem("badeya_cart")) || {}; }catch(e){ cart = {}; }
@@ -570,7 +574,7 @@ function renderProducts(){
       ? `<span class="price"><span class="price-was">${p.was} ج.م</span>${p.price} <small>ج.م</small></span>`
       : `<span class="price">${p.price} <small>ج.م</small></span>`;
     card.innerHTML = `
-      <div class="prod-photo"><img src="${p.img}" alt="${p.name} — ${p.size}" loading="lazy"></div>
+      <div class="prod-photo"><img src="${imgUrl(p.img)}" alt="${p.name} — ${p.size}" loading="lazy"></div>
       <span class="${tagClass}">${p.tag || p.size}</span>
       <h3>${p.name}</h3>
       <p class="desc">${p.desc}</p>
@@ -631,7 +635,7 @@ function renderCart(){
   }
   body.innerHTML = items.map(i=>`
     <div class="cart-item">
-      <img class="cart-thumb" src="${i.img}" alt="">
+      <img class="cart-thumb" src="${imgUrl(i.img)}" alt="">
 
       <div class="info"><h4>${i.name} — ${i.size}</h4><span>${i.price} ج.م × ${i.qty} = <b>${i.price*i.qty} ج.م</b></span></div>
       <div class="qty">
